@@ -44,17 +44,17 @@ export function Cats() {
       <div className={styles.main}>
         <div className={styles.imgContainer}>
           <h1>Images</h1>
-          {imagesStatus === "fulfilled" ? (
-            catImages.map((image, idx) => {
-              return (
-                <div key={idx} className={styles.image}>
-                  <img className={styles.eachImage} src={image.url} />
-                </div>
-              );
-            })
-          ) : (
-            <Loading />
-          )}
+          <div className="imagesBlock">
+            {imagesStatus === "fulfilled" ? (
+              catImages.map((image, idx) => {
+                return (
+                  <img key={idx} className={styles.eachImage} src={image.url} />
+                );
+              })
+            ) : (
+              <Loading />
+            )}
+          </div>
           {imageBrowsingStatus !== "fulfilled" ? <Loading /> : null}
           {imagesStatus === "fulfilled" && (
             <button
@@ -66,8 +66,11 @@ export function Cats() {
           )}
         </div>
         <div className={styles.categoriesContainer}>
-          <h1>Select the category</h1>
-          <select onChange={handleCategorySelect}>
+          <p className={styles.categoryTitle}>Select the category</p>
+          <select
+            className={styles.selectCategory}
+            onChange={handleCategorySelect}
+          >
             <option value={"..."}>...</option>
             {status === "fulfilled" &&
               catCategories.map((category, idx) => {
