@@ -56,12 +56,14 @@ export function Cats() {
             <Loading />
           )}
           {imageBrowsingStatus !== "fulfilled" ? <Loading /> : null}
-          <button
-            onClick={handleImagesBrowsing}
-            className={styles.browseImages}
-          >
-            Browse more...
-          </button>
+          {imagesStatus === "fulfilled" && (
+            <button
+              onClick={handleImagesBrowsing}
+              className={styles.browseImages}
+            >
+              Browse more...
+            </button>
+          )}
         </div>
         <div className={styles.categoriesContainer}>
           <h1>Select the category</h1>
