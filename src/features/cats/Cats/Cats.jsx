@@ -35,8 +35,8 @@ export function Cats() {
     setBrowsingPage(browsingPage + 1);
   };
 
-  const handleCategorySelect = (e) => {
-    dispatch(getImagesByCategory(e.target.value));
+  const handleCategorySelect = ({ target: { value } }) => {
+    dispatch(getImagesByCategory(value));
   };
 
   return (
