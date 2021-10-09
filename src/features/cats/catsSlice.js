@@ -5,7 +5,7 @@ const initialState = {
   catImages: [],
   status: "",
   imagesStatus: "",
-  imageBrowsingStatus: "",
+  imageBrowsingStatus: "fulfilled",
 };
 
 export const getCatsCategories = createAsyncThunk(
@@ -59,7 +59,7 @@ export const catsSlice = createSlice({
         state.status = "loading";
       })
       .addCase(getCatsCategories.fulfilled, (state, action) => {
-        state.status = "fullfilled";
+        state.status = "fulfilled";
         state.catCategories = action.payload;
       })
 
@@ -67,7 +67,7 @@ export const catsSlice = createSlice({
         state.imagesStatus = "loading";
       })
       .addCase(getCatsImages.fulfilled, (state, action) => {
-        state.imagesStatus = "fullfilled";
+        state.imagesStatus = "fulfilled";
         state.catImages = action.payload;
       })
 
@@ -75,7 +75,7 @@ export const catsSlice = createSlice({
         state.imageBrowsingStatus = "loading";
       })
       .addCase(browseMoreImages.fulfilled, (state, action) => {
-        state.imageBrowsingStatus = "fullfilled";
+        state.imageBrowsingStatus = "fulfilled";
         state.catImages = [...current(state).catImages, ...action.payload];
       })
 
@@ -83,7 +83,7 @@ export const catsSlice = createSlice({
         state.imageBrowsingStatus = "loading";
       })
       .addCase(getImagesByCategory.fulfilled, (state, action) => {
-        state.imageBrowsingStatus = "fullfilled";
+        state.imageBrowsingStatus = "fulfilled";
         state.catImages = action.payload;
       });
   },

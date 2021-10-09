@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import Loading from "../../Loading/Loading";
+
 import {
   getCatsImages,
   getCatsCategories,
@@ -12,9 +14,13 @@ import styles from "./Cats.module.css";
 export function Cats() {
   const [browsingPage, setBrowsingPage] = useState(2);
 
-  const { catCategories, status, catImages, imagesStatus } = useSelector(
-    (state) => state.cats
-  );
+  const {
+    catCategories,
+    status,
+    catImages,
+    imagesStatus,
+    imageBrowsingStatus,
+  } = useSelector((state) => state.cats);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -38,14 +44,18 @@ export function Cats() {
       <div className={styles.main}>
         <div className={styles.imgContainer}>
           <h1>Images</h1>
-          {imagesStatus === "fullfilled" &&
+          {imagesStatus === "fulfilled" ? (
             catImages.map((image, idx) => {
               return (
                 <div key={idx} className={styles.image}>
                   <img className={styles.eachImage} src={image.url} />
                 </div>
               );
-            })}
+            })
+          ) : (
+            <Loading />
+          )}
+          {imageBrowsingStatus !== "fulfilled" ? <Loading /> : null}
           <button
             onClick={handleImagesBrowsing}
             className={styles.browseImages}
@@ -57,7 +67,7 @@ export function Cats() {
           <h1>Select the category</h1>
           <select onChange={handleCategorySelect}>
             <option value={"..."}>...</option>
-            {status === "fullfilled" &&
+            {status === "fulfilled" &&
               catCategories.map((category, idx) => {
                 return (
                   <option
