@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import Loading from "../../Loading/Loading";
 
+import Loading from "../../Loading/Loading";
 import {
   getCatsImages,
   getCatsCategories,
@@ -14,6 +14,8 @@ import styles from "./Cats.module.css";
 export function Cats() {
   const [browsingPage, setBrowsingPage] = useState(2);
 
+  const dispatch = useDispatch();
+
   const {
     catCategories,
     status,
@@ -21,14 +23,11 @@ export function Cats() {
     imagesStatus,
     imageBrowsingStatus,
   } = useSelector((state) => state.cats);
-  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getCatsCategories());
     dispatch(getCatsImages());
-  }, []);
-
-  // useEffect(() => {}, [browsingPage]);
+  }, [dispatch]);
 
   const handleImagesBrowsing = () => {
     dispatch(browseMoreImages(browsingPage));
@@ -48,7 +47,12 @@ export function Cats() {
             {imagesStatus === "fulfilled" ? (
               catImages.map((image, idx) => {
                 return (
-                  <img key={idx} className={styles.eachImage} src={image.url} />
+                  <img
+                    key={idx}
+                    className={styles.eachImage}
+                    src={image.url}
+                    alt="it is a cat"
+                  />
                 );
               })
             ) : (
