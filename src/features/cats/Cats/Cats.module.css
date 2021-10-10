@@ -56,3 +56,22 @@
 .browseImages:hover {
   cursor: pointer;
 }
+
+@media screen and (max-width: 680px) {
+  .imgContainer {
+    width: 60%;
+  }
+
+  .categoriesContainer {
+    width: 40%;
+    padding: 10px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .eachImage {
+    width: 180px;
+    height: 300px;
+    margin: 10px;
+  }
+}
