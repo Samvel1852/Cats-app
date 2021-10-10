@@ -8,3 +8,5 @@ This is a single application created with react-redux-toolkit which loads and sh
 - You can click browse more at the bottom of the page. Each click to browse more button will add and show 10 more images.
 
 In this app there is not used any ui lib. Asynchronous actions created by redux-thunk.
+
+Hope you will enjoy [The cats app](https://cats-app.vercel.app/)
