@@ -55,7 +55,7 @@ export function Cats() {
                       key={idx}
                       className={styles.eachImage}
                       src={image.url}
-                      alt="it is a cat"
+                      alt="Loading..."
                     />
                   );
                 })
@@ -76,7 +76,10 @@ export function Cats() {
           <div className={styles.categoriesContainer}>
             <p className={styles.categoryTitle}>Select the category</p>
             <ul className={styles.selectCategory}>
-              <li className={styles.home}>
+              <li
+                onClick={() => handleCategorySelect(1)}
+                className={styles.home}
+              >
                 <Link to={"/"}>home</Link>
               </li>
               {status === "fulfilled" &&

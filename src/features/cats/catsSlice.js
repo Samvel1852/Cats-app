@@ -40,7 +40,7 @@ export const browseMoreImages = createAsyncThunk(
   async (page) => {
     const browsedImages = await fetch(
       `https://api.thecatapi.com/v1/images/search?limit=10&page=${page}&category_ids=${
-        Number(window.location.pathname.slice(1)) || 1
+        window.location.pathname.slice(1) || 1
       }`
     ).then((res) => res.json());
     return browsedImages;
