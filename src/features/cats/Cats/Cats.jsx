@@ -75,11 +75,10 @@ export function Cats() {
           </div>
           <div className={styles.categoriesContainer}>
             <p className={styles.categoryTitle}>Select the category</p>
-            <ul
-              className={styles.selectCategory}
-              // onChange={handleCategorySelect}
-            >
-              {/* <li value={"..."}>...</li> */}
+            <ul className={styles.selectCategory}>
+              <li className={styles.home}>
+                <Link to={"/"}>home</Link>
+              </li>
               {status === "fulfilled" &&
                 catCategories.map((category, idx) => {
                   return (

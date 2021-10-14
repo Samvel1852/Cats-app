@@ -46,6 +46,15 @@
   margin: 2px;
 }
 
+.home {
+  list-style: none;
+  margin: 2px;
+}
+
+.home:hover {
+  cursor: pointer;
+}
+
 .category:hover {
   cursor: pointer;
 }
