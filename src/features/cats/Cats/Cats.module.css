@@ -42,6 +42,7 @@
 }
 
 .category {
+  list-style: none;
   margin: 2px;
 }
 
@@ -55,6 +56,11 @@
 
 .browseImages:hover {
   cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  color: black;
 }
 
 @media screen and (max-width: 680px) {

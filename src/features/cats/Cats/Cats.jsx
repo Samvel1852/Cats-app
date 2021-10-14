@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 
 import Loading from "../../Loading/Loading";
 import {
@@ -15,6 +16,8 @@ export function Cats() {
   const [browsingPage, setBrowsingPage] = useState(2);
 
   const dispatch = useDispatch();
+
+  // const categoryId = Number(window.location.pathname.slice(1));
 
   const {
     catCategories,
@@ -34,63 +37,66 @@ export function Cats() {
     setBrowsingPage(browsingPage + 1);
   };
 
-  const handleCategorySelect = ({ target: { value } }) => {
-    dispatch(getImagesByCategory(value));
+  const handleCategorySelect = (id) => {
+    dispatch(getImagesByCategory(id));
   };
 
   return (
     <>
-      <div className={styles.main}>
-        <div className={styles.imgContainer}>
-          <h1>Images</h1>
-          <div className="imagesBlock">
-            {imagesStatus === "fulfilled" ? (
-              catImages.map((image, idx) => {
-                return (
-                  <img
-                    key={idx}
-                    className={styles.eachImage}
-                    src={image.url}
-                    alt="it is a cat"
-                  />
-                );
-              })
-            ) : (
-              <Loading />
+      <Router>
+        <div className={styles.main}>
+          <div className={styles.imgContainer}>
+            <h1>Images</h1>
+            <div className="imagesBlock">
+              {imagesStatus === "fulfilled" ? (
+                catImages.map((image, idx) => {
+                  return (
+                    <img
+                      key={idx}
+                      className={styles.eachImage}
+                      src={image.url}
+                      alt="it is a cat"
+                    />
+                  );
+                })
+              ) : (
+                <Loading />
+              )}
+            </div>
+            {imageBrowsingStatus !== "fulfilled" ? <Loading /> : null}
+            {imagesStatus === "fulfilled" && (
+              <button
+                onClick={() => handleImagesBrowsing()}
+                className={styles.browseImages}
+              >
+                Browse more...
+              </button>
             )}
           </div>
-          {imageBrowsingStatus !== "fulfilled" ? <Loading /> : null}
-          {imagesStatus === "fulfilled" && (
-            <button
-              onClick={handleImagesBrowsing}
-              className={styles.browseImages}
+          <div className={styles.categoriesContainer}>
+            <p className={styles.categoryTitle}>Select the category</p>
+            <ul
+              className={styles.selectCategory}
+              // onChange={handleCategorySelect}
             >
-              Browse more...
-            </button>
-          )}
+              {/* <li value={"..."}>...</li> */}
+              {status === "fulfilled" &&
+                catCategories.map((category, idx) => {
+                  return (
+                    <li
+                      onClick={() => handleCategorySelect(category.id)}
+                      value={category.id}
+                      className={styles.category}
+                      key={idx}
+                    >
+                      <Link to={`${category.id}`}>{category.name}</Link>
+                    </li>
+                  );
+                })}
+            </ul>
+          </div>
         </div>
-        <div className={styles.categoriesContainer}>
-          <p className={styles.categoryTitle}>Select the category</p>
-          <select
-            className={styles.selectCategory}
-            onChange={handleCategorySelect}
-          >
-            <option value={"..."}>...</option>
-            {status === "fulfilled" &&
-              catCategories.map((category, idx) => {
-                return (
-                  <option
-                    value={category.id}
-                    className={styles.category}
-                    key={idx}
-                  >
-                    {category.name}
-                  </option>
-                );
-              })}
-          </select>
-        </div>
-      </div>
+      </Router>
     </>
   );
 }
