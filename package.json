@@ -15,6 +15,9 @@
     "react-scripts": "4.0.3",
     "urix": "^0.1.0"
   },
+  "optionalDependencies": {
+    "fsevents": "*"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
